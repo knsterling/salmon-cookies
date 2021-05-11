@@ -10,7 +10,7 @@ const seattle = {
     totalDailyCookies: 0,
     calcCustEachHour: function () {
         for (let i = 0; i < hours.length; i++) {
-            this.CustomersEachHour.push(random(this.minCustPerHour, this.maxCustPerHour))
+            this.custEachHour.push(random(this.minCustPerHour, this.maxCustPerHour))
         }
     },
 
@@ -79,7 +79,7 @@ const tokyo = {
 
     calcCustEachHour: function () {
         for (let i = 0; i < hours.length; i++) {
-            this.CustomersEachHour.push(random(this.minCustPerHour, this.maxCustPerHour))
+            this.custEachHour.push(random(this.minCustPerHour, this.maxCustPerHour))
         }
     },
 
@@ -350,27 +350,26 @@ const allShops5 = [
 // };
 
 // CONSTRUCTOR FUNCTIONS
-// function cookieStand(name, minCustPerHour, maxCustPerHour, avgCookiesPerSale,
-//     custEachHour, cookiesEachHour, totalDailyCookies) {
-//     this.country = name;
-//     this.minimum = minCustPerHour;
-//     this.maximum = maxCustPerHour;
-//     this.average = avgCookiesPerSale;
-//     this.customer = custEachHour;
-//     this.cookies = cookiesEachHour;
-//     this.total = totalDailyCookies;
-// }
+function cookieStand(name, minCustPerHour, maxCustPerHour, avgCookiesPerSale,
+    custEachHour, cookiesEachHour, totalDailyCookies) {
+    this.country = name;
+    this.minimum = minCustPerHour;
+    this.maximum = maxCustPerHour;
+    this.average = avgCookiesPerSale;
+    this.customer = custEachHour;
+    this.cookies = cookiesEachHour;
+    this.total = totalDailyCookies;
+}
 
-// const cookieLima = new cookieStand('lima', 2, 16, 4.6, [], [], 0)
-// const cookieParis = new cookieStand('paris', 20, 38, 2.3, [], [], 0)
-// const cookieDubai = new cookieStand('dubai', 11, 38, 3.7, [], [], 0)
-// const cookieTokyo = new cookieStand('tokyo', 3, 24, 1.2, [], [], 0)
-// const cookieSeattle = new cookieStand('seattle' 23, 65, 6.3, [], [], 0)
+const cookieLima = new cookieStand('lima', 2, 16, 4.6, [], [], 0)
+const cookieParis = new cookieStand('paris', 20, 38, 2.3, [], [], 0)
+const cookieDubai = new cookieStand('dubai', 11, 38, 3.7, [], [], 0)
+const cookieTokyo = new cookieStand('tokyo', 3, 24, 1.2, [], [], 0)
+const cookieSeattle = new cookieStand('seattle', 23, 65, 6.3, [], [], 0)
 
-// cookieStand.prototype.location = function () {
-//     return this.country + '' + this.minimum
-// }
+cookieStand.prototype.location = function () {
+    return this.country + '' + this.minimum
+}
 
-// document.getElementById('cookie-stand').innerHTML = 'Our location in ' + ' ' + cookieLima.location() +
-//     ' sells a minimum of ' + cookieLima.minimum + ' per hour.'
+
 

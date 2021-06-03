@@ -304,7 +304,7 @@ const allShops5 = [
 
 
 // CONSTRUCTOR FUNCTIONS
-const hours = ['10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm'];
+// const hours = ['10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm'];
 const shops = [];
 let table;
 
@@ -419,74 +419,74 @@ function renderUpdate(shop, min, max, avg) {
     for (let i = 0; i < shop.hourlyCookies.length; i++) {
         trEl.childNodes[trEl.childNodes.length - 1].textContent = shop.dailyCookies;
     }
+}
+function renderTotals() {
+    const tFoot = document.getElementById('t-foot');
+    tFoot.innerHTML = '';
 
-    function renderTotals() {
-        const tFoot = document.getElementById('t-foot');
-        tFoot.innerHTML = '';
+    const trEl = document.createElement('tr');
+    let thEl = document.createElement('th');
+    thEl.textContent = 'Totals';
+    trEl.appendChild(thEl);
 
-        const trEl = document.createElement('tr');
-        let thEl = document.createElement('th');
-        thEl.textContent = 'Totals';
-        trEl.appendChild(thEl);
+    let total = 0;
 
-        let total = 0;
-
-        for (let hourIndex = 0; hourIndex < hours.length; hourIndex++) {
-            let hourlyTotal = 0;
-            for (let shopIndex = 0; shopIndex < shops.length; shipIndex++) {
-                hourlyTotal += shops[shopIndex].hourlyCookies[hourIndex];
-            }
-            thEl = document.createElement('th');
-            thEl.textContent = hourlTotal;
-            trEl.appendChild(thEl);
-
-            total += hourlyTotal;
+    for (let hourIndex = 0; hourIndex < hours.length; hourIndex++) {
+        let hourlyTotal = 0;
+        for (let shopIndex = 0; shopIndex < shops.length; shipIndex++) {
+            hourlyTotal += shops[shopIndex].hourlyCookies[hourIndex];
         }
-
         thEl = document.createElement('th');
-        thEl.textContent = total;
+        thEl.textContent = hourlTotal;
         trEl.appendChild(thEl);
 
-        tFoot.appendChild(trEl);
-
+        total += hourlyTotal;
     }
 
-    document.getElementById('new-store').addEventListener('submit', function (event) {
-        event.preventDefault();
-        let exists = false;
-        const store = event.target.location.value;
-        const min = parseInt(event.target.min.value);
-        const max = parseInt(event.target.max.value);
-        const avg = parseInt(event.target.avg.value);
+    thEl = document.createElement('th');
+    thEl.textContent = total;
+    trEl.appendChild(thEl);
 
-        let i = 0;
-        for (i; i < ships.length; i++) {
-            if (shops[i].id === store.replace('', '').toLowerCase()) {
-                exists = true;
-                break;
-            }
+    tFoot.appendChild(trEl);
+
+}
+
+document.getElementById('new-store').addEventListener('submit', function (event) {
+    event.preventDefault();
+    let exists = false;
+    const store = event.target.location.value;
+    const min = parseInt(event.target.min.value);
+    const max = parseInt(event.target.max.value);
+    const avg = parseInt(event.target.avg.value);
+
+    let i = 0;
+    for (i; i < ships.length; i++) {
+        if (shops[i].id === store.replace('', '').toLowerCase()) {
+            exists = true;
+            break;
         }
-
-        if (exists === true) {
-            renderUpdate(shops[i], min, max, avg);
-        } else {
-            renderNew(store, min, max, avg);
-        }
-
-        event.target.store.value = null;
-        event.target.min.value = null;
-        event.target.max.value = null;
-        event.target.avg.value = null;
-    });
-
-    function setup() {
-        renderTable();
-        new CookieStand('Seattle', 23, 65, 6.3, 'seattle');
-        new CookieStand('Tokyo', 3, 24, 1.2, 'seatac');
-        new CookieStand('Dubai', 11, 38, 3.7, 'dubai');
-        new CookieStand('Paris', 20, 38, 2.3, 'paris');
-        new CookieStand('Lima', 2, 16, 4.6, 'lima');
-        renderAllStores();
     }
 
-    setup();
+    if (exists === true) {
+        renderUpdate(shops[i], min, max, avg);
+    } else {
+        renderNew(store, min, max, avg);
+    }
+
+    event.target.store.value = null;
+    event.target.min.value = null;
+    event.target.max.value = null;
+    event.target.avg.value = null;
+});
+
+function setup() {
+    renderTable();
+    new CookieStand('Seattle', 23, 65, 6.3, 'seattle');
+    new CookieStand('Tokyo', 3, 24, 1.2, 'seatac');
+    new CookieStand('Dubai', 11, 38, 3.7, 'dubai');
+    new CookieStand('Paris', 20, 38, 2.3, 'paris');
+    new CookieStand('Lima', 2, 16, 4.6, 'lima');
+    renderAllStores();
+}
+
+setup();
